@@ -53,7 +53,21 @@ body {
     margin-right: auto;
 }
 .buttons button {
-    padding: 15px;
-    font-size: 1.5em;
-    width: 70px;
+    padding: 10px;
+    font-size: 1.9em;
+    width: 80px;
+    border-radius: 5px;
+}
+.buttons button:hover {
+    opacity: 0.8;
+}
+.numbers {
+    background-color: yellowgreen;
+}
+.operation, .negative {
+    background: blueviolet;
+    color: white;
+}
+.clear {
+    background: crimson;
 }
