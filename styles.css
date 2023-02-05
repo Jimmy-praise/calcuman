@@ -64,7 +64,7 @@ body {
 .numbers {
     background-color: yellowgreen;
 }
-.operation, .negative {
+.operator, .negative {
     background: blueviolet;
     color: white;
 }
