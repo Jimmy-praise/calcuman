@@ -3,6 +3,7 @@ const numberButtons = document.querySelectorAll('.numbers')
 const operators = document.querySelectorAll('.operator')
 
 let inputs = [];
+let currentOperator = ''
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -14,10 +15,16 @@ numberButtons.forEach(button => {
     });
 });
 
-operators.forEach (button => {
-    button.addEventListener('click', () => {
-        inputs.push(`${display.textContent}${button.textContent}`);
+operators.forEach (operator => {
+    operator.addEventListener('click', () => {
+        if (inputs.length == 0) {
+            inputs.push(`${display.textContent}`);
+        } else {
+            inputs.push(`${currentOperator} ${display.textContent}`);
+        }
+        currentOperator = `${operator.textContent}`
         display.textContent = 0;
+
     })
 })
 
@@ -36,7 +43,3 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 };
-
-function operate(params) {
-    
-}
