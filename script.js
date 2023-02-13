@@ -1,14 +1,16 @@
-const display = document.querySelector(".input-display")
-const numberButtons = document.querySelectorAll('.numbers')
-const operators = document.querySelectorAll('.operator')
-const equal = document.querySelector('.equal')
-
 let inputs = [];
 let currentOperator = ''
 
+const display = document.querySelector(".input-display")
+const numberButtons = document.querySelectorAll('.numbers')
+
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if (display.textContent == 0) {
+        if (display.textContent == operate()) {
+            display.textContent = button.textContent;
+            inputs = [];
+        }
+        else if (display.textContent == 0) {
             display.textContent = button.textContent
         } else {
             display.textContent += button.textContent
@@ -16,18 +18,20 @@ numberButtons.forEach(button => {
     });
 });
 
+const operators = document.querySelectorAll('.operator')
+
 operators.forEach (operator => {
     operator.addEventListener('click', () => {
         if (inputs.length == 0) {
             inputs.push(`+ ${display.textContent}`);
         } else {
             inputs.push(`${currentOperator} ${display.textContent}`);
-        }
-        currentOperator = `${operator.textContent}`
+        };
+        currentOperator = `${operator.textContent}`;
         display.textContent = 0;
 
-    })
-})
+    });
+});
 
 function add(a, b) {
     return a + b;
@@ -63,6 +67,8 @@ function operate() {
     }, 0)
 }
 
+const equal = document.querySelector('.equal')
+
 equal.addEventListener('click', () => {
-    display.textContent = operate()
+    display.textContent = operate();
 })
