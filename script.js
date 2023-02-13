@@ -72,3 +72,22 @@ const equal = document.querySelector('.equal')
 equal.addEventListener('click', () => {
     display.textContent = operate();
 })
+
+const clearAll = document.querySelector('#clearAll');
+const backspace = document.querySelector('#backspace')
+
+clearAll.addEventListener('click', () => {
+    inputs = [];
+    display.textContent = 0;
+});
+backspace.addEventListener('click', () => {
+    if (display.textContent = operate()) {
+        display.textContent = 0;
+        inputs = [];
+    }
+    else if (display.textContent.length == 1) {
+        display.textContent = 0;
+    } else {
+        display.textContent = display.textContent.slice(0, -1);
+    }
+})
