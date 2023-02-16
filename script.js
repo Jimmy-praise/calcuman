@@ -7,16 +7,32 @@ const numberButtons = document.querySelectorAll('.numbers')
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (display.textContent == operate()) {
-            display.textContent = button.textContent;
+            display.textContent = button.getAttribute('key');
             inputs = [];
         }
         else if (display.textContent == 0) {
-            display.textContent = button.textContent
+            display.textContent = button.getAttribute('key')
         } else {
-            display.textContent += button.textContent
+            display.textContent += button.getAttribute('key')
         };
     });
 });
+
+const negative = document.querySelector('.negative')
+
+negative.addEventListener('click', () => {
+    if (display.textContent == operate()) {
+        display.textContent = negative.getAttribute('key');
+        inputs = [];
+    }
+    else if (display.textContent == 0) {
+        display.textContent = negative.getAttribute('key')
+    } 
+    else if ((display.textContent !== 0)) {
+        display.textContent = negative.getAttribute('key').concat(display.textContent)
+    };
+})
+
 
 const operators = document.querySelectorAll('.operator')
 
@@ -81,13 +97,14 @@ clearAll.addEventListener('click', () => {
     display.textContent = 0;
 });
 backspace.addEventListener('click', () => {
-    if (display.textContent = operate()) {
+    if (display.textContent == operate()) {
         display.textContent = 0;
         inputs = [];
     }
     else if (display.textContent.length == 1) {
         display.textContent = 0;
-    } else {
+    } 
+    else {
         display.textContent = display.textContent.slice(0, -1);
     }
 })
