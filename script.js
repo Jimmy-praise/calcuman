@@ -21,7 +21,10 @@ numberButtons.forEach(button => {
 const negative = document.querySelector('.negative')
 
 negative.addEventListener('click', () => {
-    if (display.textContent == operate()) {
+    if (display.textContent.includes('-')) {
+        display.textContent = display.textContent.slice(1)
+    }
+    else if (display.textContent == operate()) {
         display.textContent = negative.getAttribute('key');
         inputs = [];
     }
