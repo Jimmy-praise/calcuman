@@ -6,7 +6,10 @@ const numberButtons = document.querySelectorAll('.numbers')
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if (display.textContent == operate()) {
+        if (display.textContent.length == 12) {
+            display.textContent = display.textContent;
+        }
+        else if (display.textContent == operate()) {
             display.textContent = button.getAttribute('key');
             inputs = [];
         }
@@ -69,7 +72,7 @@ function divide(a, b) {
 };
 
 function operate() {
-    return inputs.reduce((ans, number) => {
+    let result = inputs.reduce((ans, number) => {
         a = ans;
         b = parseInt(number.slice(2));
 
@@ -82,8 +85,13 @@ function operate() {
         } else if (number.includes('- ')) {
             ans = subtract(a, b);
         }
-        return ans
+        return ans;
     }, 0)
+    if (result.toString().length > 12) {
+        return result.toExponential(9);
+    } else {
+        return result;
+    }
 }
 
 const equal = document.querySelector('.equal')
