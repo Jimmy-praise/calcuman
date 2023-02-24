@@ -1,46 +1,66 @@
 let inputs = [];
-let currentOperator = ''
+let currentOperator = '';
 
-const display = document.querySelector(".input-display")
-const numberButtons = document.querySelectorAll('.numbers')
+const display = document.querySelector(".input-display");
+
+const numberButtons = document.querySelectorAll('.numbers');
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (display.textContent.length == 12) {
-            display.textContent = display.textContent;
+
+        }
+        else if (display.textContent.includes('0.')) {
+            display.textContent += button.getAttribute('key');
         }
         else if (display.textContent == operate()) {
             display.textContent = button.getAttribute('key');
             inputs = [];
         }
-        else if (display.textContent == 0) {
-            display.textContent = button.getAttribute('key')
+        else if (display.textContent == '0') {
+            display.textContent = button.getAttribute('key');
         } else {
-            display.textContent += button.getAttribute('key')
+            display.textContent += button.getAttribute('key');
         };
     });
 });
 
-const negative = document.querySelector('.negative')
+const negative = document.querySelector('#negative');
 
 negative.addEventListener('click', () => {
     if (display.textContent.includes('-')) {
-        display.textContent = display.textContent.slice(1)
+        display.textContent = display.textContent.slice(1);
     }
     else if (display.textContent == operate()) {
         display.textContent = negative.getAttribute('key');
         inputs = [];
     }
     else if (display.textContent == 0) {
-        display.textContent = negative.getAttribute('key')
+        display.textContent = negative.getAttribute('key');
     } 
     else if ((display.textContent !== 0)) {
-        display.textContent = negative.getAttribute('key').concat(display.textContent)
+        display.textContent = negative.getAttribute('key').concat(display.textContent);
+    };
+});
+
+const decimal = document.querySelector('#decimal');
+
+decimal.addEventListener('click', () => {
+    if (display.textContent == operate()) {
+        display.textContent = '0.';
+        inputs = [];
+    }
+    else if (display.textContent.length == 11 || display.textContent.includes('.')) {
+
+    }
+    else if (display.textContent == 0) {
+        display.textContent += '.';
+    } else {
+        display.textContent += decimal.getAttribute('key')
     };
 })
 
-
-const operators = document.querySelectorAll('.operator')
+const operators = document.querySelectorAll('.operator');
 
 operators.forEach (operator => {
     operator.addEventListener('click', () => {
@@ -74,7 +94,7 @@ function divide(a, b) {
 function operate() {
     let result = inputs.reduce((ans, number) => {
         a = ans;
-        b = parseInt(number.slice(2));
+        b = parseFloat(number.slice(2));
 
         if (number.includes('/ ')) {
             ans = divide(a, b);
@@ -94,7 +114,7 @@ function operate() {
     }
 }
 
-const equal = document.querySelector('.equal')
+const equal = document.querySelector('#equal')
 
 equal.addEventListener('click', () => {
     display.textContent = operate();

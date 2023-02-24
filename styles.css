@@ -66,7 +66,7 @@ body {
 .buttons button:hover {
     opacity: 0.8;
 }
-.numbers, .negative {
+.numbers, #negative, #decimal {
     background-color: yellowgreen;
 }
 .operator {
