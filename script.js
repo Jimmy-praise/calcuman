@@ -14,11 +14,12 @@ numberButtons.forEach(button => {
         else if (resultDisplay.textContent.includes('0.')) {
             resultDisplay.textContent += button.getAttribute('key');
         }
-        else if (resultDisplay.textContent == operate()) {
+        else if (resultDisplay.textContent == result) {
             resultDisplay.textContent = button.getAttribute('key');
             inputs = [];
+            inputsDisplay.textContent = '';
         }
-        else if (resultDisplay.textContent == '0') {
+        else if (resultDisplay.textContent == '0' || resultDisplay.textContent == operate()) {
             resultDisplay.textContent = button.getAttribute('key');
         } else {
             resultDisplay.textContent += button.getAttribute('key');
@@ -32,11 +33,11 @@ negative.addEventListener('click', () => {
     if (resultDisplay.textContent.includes('-')) {
         resultDisplay.textContent = resultDisplay.textContent.slice(1);
     }
-    else if (resultDisplay.textContent == operate()) {
+    else if (resultDisplay.textContent == result) {
         resultDisplay.textContent = negative.getAttribute('key');
         inputs = [];
     }
-    else if (resultDisplay.textContent == 0) {
+    else if (resultDisplay.textContent == 0 || resultDisplay.textContent == operate()) {
         resultDisplay.textContent = negative.getAttribute('key');
     } 
     else if ((resultDisplay.textContent !== 0)) {
@@ -47,14 +48,15 @@ negative.addEventListener('click', () => {
 const decimal = document.querySelector('#decimal');
 
 decimal.addEventListener('click', () => {
-    if (resultDisplay.textContent == operate()) {
+    if (resultDisplay.textContent == result) {
         resultDisplay.textContent = '0.';
         inputs = [];
+        inputsDisplay.textContent = '';
     }
     else if (resultDisplay.textContent.length == 11 || resultDisplay.textContent.includes('.')) {
 
     }
-    else if (resultDisplay.textContent == 0) {
+    else if (resultDisplay.textContent == '0' || resultDisplay.textContent == operate()) {
         resultDisplay.textContent += '.';
     } else {
         resultDisplay.textContent += decimal.getAttribute('key')
@@ -70,8 +72,11 @@ operators.forEach (operator => {
         } else {
             inputs.push(`${currentOperator} ${resultDisplay.textContent}`);
         };
+
+        inputsDisplay.textContent += `${resultDisplay.textContent} ${operator.textContent} `
+
         currentOperator = `${operator.textContent}`;
-        resultDisplay.textContent = 0;
+        resultDisplay.textContent = operate();
 
     });
 });
@@ -115,10 +120,13 @@ function operate() {
     }
 }
 
-const equal = document.querySelector('#equal')
+const equal = document.querySelector('#equal');
+
+let result = '';
 
 equal.addEventListener('click', () => {
-    resultDisplay.textContent = operate();
+    result = operate();
+    resultDisplay.textContent = result;
 })
 
 const clearAll = document.querySelector('#clearAll');
@@ -126,12 +134,14 @@ const backspace = document.querySelector('#backspace')
 
 clearAll.addEventListener('click', () => {
     inputs = [];
+    inputsDisplay.textContent = ''
     resultDisplay.textContent = 0;
 });
 backspace.addEventListener('click', () => {
-    if (resultDisplay.textContent == operate()) {
+    if (resultDisplay.textContent == result) {
         resultDisplay.textContent = 0;
         inputs = [];
+        inputsDisplay.textContent = ''
     }
     else if (resultDisplay.textContent.length == 1) {
         resultDisplay.textContent = 0;
