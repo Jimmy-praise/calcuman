@@ -88,7 +88,7 @@ operators.forEach (operator => {
             resultDisplay.textContent = operate();
         };
 
-        currentOperator = `${operator.textContent}`;
+        currentOperator = `${operator.getAttribute('key')}`;
 
     });
 });
@@ -116,7 +116,7 @@ function operate() {
 
         if (number.includes('/ ')) {
             ans = divide(a, b);
-        } else if (number.includes('x ')) {
+        } else if (number.includes('* ')) {
             ans = multiply(a, b);
         } else if (number.includes('+ ')) {
             ans = add(a, b);
