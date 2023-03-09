@@ -71,7 +71,7 @@ body {
 .numbers, #negative, #decimal {
     background-color: yellowgreen;
 }
-.operator {
+.operator, #equal {
     background: blueviolet;
     color: white;
 }
