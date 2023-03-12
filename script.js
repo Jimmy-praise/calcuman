@@ -1,6 +1,6 @@
 let inputs = [];
 let currentOperator = '';
-let result = '';
+let finalAnswer = 0;
 
 
 const resultDisplay = document.querySelector(".result");
@@ -10,7 +10,7 @@ function numbers(number) {
     if (resultDisplay.textContent.length == 12) {
 
     }
-    else if (resultDisplay.textContent == result) {
+    else if (resultDisplay.textContent == finalAnswer) {
         resultDisplay.textContent = number.getAttribute('key');
         inputs = [];
         inputsDisplay.textContent = '';
@@ -39,7 +39,7 @@ function operators(operator) {
         inputsDisplay.textContent = `${resultDisplay.textContent} ${operator.textContent} `;
         resultDisplay.textContent = operate();
     } 
-    else if (resultDisplay.textContent == result) {
+    else if (resultDisplay.textContent == finalAnswer) {
         resultDisplay.textContent = operate().slice(1);
         inputs = [`+ ${resultDisplay.textContent}`];
         inputsDisplay.textContent = `${resultDisplay.textContent} ${operator.textContent} `
@@ -64,7 +64,7 @@ function negative() {
     if (resultDisplay.textContent.includes('-')) {
         resultDisplay.textContent = resultDisplay.textContent.slice(1);
     } 
-    else if (resultDisplay.textContent == 0 || resultDisplay.textContent == operate() || resultDisplay.textContent == result) {
+    else if (resultDisplay.textContent == 0 || resultDisplay.textContent == operate() || resultDisplay.textContent == finalAnswer) {
         
     }
     else if ((resultDisplay.textContent !== 0)) {
@@ -75,12 +75,12 @@ const negativeButton = document.querySelector('#negative');
 negativeButton.addEventListener('click', negative);
 
 function decimal() {
-    if (resultDisplay.textContent == result) {
+    if (resultDisplay.textContent == finalAnswer) {
         resultDisplay.textContent = '0.';
         inputs = [];
         inputsDisplay.textContent = '';
     } 
-    else if (resultDisplay.textContent == '0' || resultDisplay.textContent == operate()) {
+    else if (resultDisplay.textContent == '0' || resultDisplay.textContent == operate().slice(1)) {
         resultDisplay.textContent = '0.';
     } 
     else if (resultDisplay.textContent.length == 11 || resultDisplay.textContent.includes('.')) {
@@ -138,8 +138,8 @@ function equal() {
     inputs.push(`${currentOperator} ${resultDisplay.textContent}`);
     inputsDisplay.textContent += `${resultDisplay.textContent}`;
 
-    result = operate();
-    resultDisplay.textContent = result;
+    finalAnswer = operate();
+    resultDisplay.textContent = finalAnswer;
 }
 
 const equalButton = document.querySelector('#equal');
@@ -153,7 +153,7 @@ clearAll.addEventListener('click', () => {
 });
 
 function backspace() {
-    if (resultDisplay.textContent == result) {
+    if (resultDisplay.textContent == finalAnswer) {
         resultDisplay.textContent = 0;
         inputs = [];
         inputsDisplay.textContent = ''
