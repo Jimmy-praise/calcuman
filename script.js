@@ -44,6 +44,9 @@ function operators(operator) {
         inputs = [`+ ${resultDisplay.textContent}`];
         inputsDisplay.textContent = `${resultDisplay.textContent} ${operator.textContent} `
     }
+    else if (resultDisplay.textContent == operate() || resultDisplay.textContent == operate().slice(1)) {
+        inputsDisplay.textContent = inputsDisplay.textContent.slice(0, -2) + `${operator.textContent} `;
+    }
     else {
         inputs.push(`${currentOperator} ${resultDisplay.textContent}`);
         inputsDisplay.textContent += `${resultDisplay.textContent} ${operator.textContent} `;
@@ -170,7 +173,7 @@ backspaceButton.addEventListener('click', backspace);
 
 window.addEventListener('keydown', (e) => {
     let numEx = /^[0-9]/;
-    let operatorEX = /\+|\-|\*|\/|\=/;
+    let operatorEX = /\+|\-|\*|\//;
 
     if (e.key == 'Enter' || e.key == '=') {
         equal();
