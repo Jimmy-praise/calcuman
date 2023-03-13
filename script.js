@@ -128,6 +128,9 @@ function operate() {
         }
         return ans;
     }, 0)
+    if (!(Number.isInteger(result))) {
+        result = Math.round(result * 1000) / 1000;
+    };
     if (result.toString().length > 12) {
         return result.toExponential(2);
     } else {
